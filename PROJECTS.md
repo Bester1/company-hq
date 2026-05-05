@@ -8,12 +8,12 @@
 #### 1. Trading Agent Live Deploy
 | Field | Value |
 |-------|-------|
-| Repo | `deploy-crypto-trading-bot` (or similar) |
+| Repo | `hyperliquid-trader` (PM2 on Oracle VM) |
 | Owner | Frikkie (CTO) + Zeus |
-| Status | **PENDING** — code written, needs Oracle VM deploy |
-| Next Action | Frikkie: push to server, Docker container, test connection |
-| Blockers | Server-side agent setup, API keys (BitMart/Finnhub) |
-| Notes | Must run 24/7 on Oracle VM. Paper trade first. |
+| Status | **DEPLOYED** — fixed bot running (1 instance, PID locked) |
+| Next Action | Monitor for 24h, verify no duplicate instances, check TP/SL fills |
+| Blockers | None — but 10 old positions remain from pre-fix duplicate runs |
+| Notes | **BUGS FIXED:** (1) Duplicate instances prevented by PID lockfile, (2) One-position-per-coin enforced, (3) RiskManager wired, (4) Daily loss circuit breaker active (5%), (5) Server-side position count used. Old positions from bot stacking will close naturally via TP/SL or can be closed manually. PM2 `restart:disabled` (no autorestart, no duplicates). Docker container removed.
 
 #### 2. JobOS Tokenomics Fix
 | Field | Value |
