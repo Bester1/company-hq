@@ -18,12 +18,12 @@
 #### 2. JobOS Tokenomics Fix
 | Field | Value |
 |-------|-------|
-| Repo | TBD / whitepaper |
+| Repo | `jobos-tokenomics` (local HTML model) |
 | Owner | Hermes (CEO) |
-| Status | **PENDING** — 110% math doesn't close |
-| Next Action | Hermes: model corrected allocation scenarios |
-| Blockers | Chairman decision on where 10% comes from |
-| Notes | Original split was 25/35/15/15/10/0/0 → proposed 30/20/15/15/10/10/10. Needs 100% math. |
+| Status | **DONE** — Scenario 3 approved and modeled |
+| Next Action | Hermes: push to Company HQ, update whitepaper |
+| Blockers | None |
+| Notes | **Final split (100%):** Ops 30%, Stakers 20%, Burn 10%, Referrals 15%, Marketing 15%, Team 10%. LP incentives funded from 950M treasury emissions (NOT revenue). Mandatory token utility required for premium features. Staking APR ~25.8% at 1K users. Annual burn 3.2M tokens (0.65% of circ at 1K users, scales to 32% at 5K). |
 
 ---
 

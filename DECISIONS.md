@@ -23,8 +23,8 @@
 ---
 
 ### 2026-05-05 | Chairman + Hermes
-**Topic:** JobOS tokenomics allocation
-**Decision:** Original 35% dividends unsustainable. Proposed: 30% ops, 20% stakers, 10% LP, 10% burn. Needs 100% math validation before implementation.
+**Topic:** JobOS tokenomics allocation — FINAL
+**Decision:** **Scenario 3 approved.** 30% Ops, 20% Stakers, 10% Burn, 15% Referrals, 15% Marketing, 10% Team = 100%. LP incentives funded from 950M treasury token emissions (NOT revenue). Mandatory token utility required for premium features. Staking APR ~25.8% at 1K users, scales attractively. Annual burn 3.2M tokens at 1K users (0.65% circ), 16.1M at 5K users (32% circ). 15% MoM growth model. Source: `/Users/user/jobos-tokenomics/index.html`
 **Signed:** Hermes (CEO)
 
 ---
