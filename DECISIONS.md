@@ -3,6 +3,19 @@
 
 ---
 
+### 2026-05-06 | Chairman + Hermes
+**Topic:** Hyperliquid Trading Analytics Dashboard + Bot Health Check
+**Decision:**
+1. Built standalone HTML trading dashboard from `trade_history (3).csv` (95 trades, 11 coins, May 4-6). Total PnL +$64.02, Volume $11,797, Win rate 12.6%.
+2. Top performers: SUI (+$32.15), OP (+$18.64), WIF (+$16.30). Worst: ARB (-$28.14), TIA (-$8.20), ETH (-$0.45).
+3. Dashboard features: KPI cards, balance history line chart, coin PnL bars, daily PnL bars, volume by direction, win rate ring, recent trades table, coin breakdown.
+4. Deployed to Mission Control as new Analytics sub-tab via DOM patching (button after Config, iframe panel after hl-sub-config).
+5. Bot health verified: `AgentSignal` imports correctly, spot USDC included in balance, RiskManager uses `getattr()` fallbacks, funding rate blocker active, one-position-per-coin enforced, daily loss circuit at 5%. No errors in logs.
+6. Dashboard file: `/home/ubuntu/mission-control/app/static/trading_dashboard.html` + copy in `/app/templates/`. Static mount: `/static/` serves from `app/templates/`.
+**Signed:** Hermes (CEO)
+
+---
+
 ### 2026-05-05 | Chairman + Hermes
 **Topic:** Company HQ & persistent memory system
 **Decision:** Build shared filesystem + GitHub repo for ground truth. Every agent reads SOUL.md on wake.
