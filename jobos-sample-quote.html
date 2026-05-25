@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobOS Sample Quote | Smith & Son Plumbing</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f3f4f6;
+      padding: 40px 20px;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+    }
+    .quote {
+      width: 794px; min-height: 1123px; background: white;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15); position: relative; overflow: hidden;
+    }
+    .topbar { height: 6px; background: #FF6B35; }
+    .header {
+      padding: 50px 60px 30px; display: flex; justify-content: space-between; align-items: flex-start;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .company-name { font-size: 22px; font-weight: 800; color: #111827; margin-bottom: 4px; }
+    .company-tagline { font-size: 12px; color: #6b7280; font-weight: 500; }
+    .company-details { margin-top: 12px; font-size: 11px; color: #6b7280; line-height: 1.6; }
+    .logo-area { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+    .logo-icon {
+      width: 44px; height: 44px; background: #111827; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { width: 24px; height: 24px; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-brand { font-size: 20px; font-weight: 800; color: #111827; letter-spacing: -0.5px; }
+    .logo-sub { font-size: 10px; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+    .quote-meta { text-align: right; }
+    .quote-label { font-size: 11px; font-weight: 700; color: #FF6B35; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+    .quote-number { font-size: 26px; font-weight: 800; color: #111827; margin-bottom: 2px; }
+    .quote-date { font-size: 12px; color: #6b7280; }
+    .quote-valid { font-size: 11px; color: #FF6B35; font-weight: 600; margin-top: 6px; }
+    .client-section {
+      padding: 30px 60px; background: #f9fafb; border-bottom: 1px solid #e5e7eb;
+      display: flex; justify-content: space-between;
+    }
+    .client-label, .loc-label, .section-title {
+      font-size: 10px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
+    }
+    .client-name { font-size: 16px; font-weight: 700; color: #111827; }
+    .client-addr { font-size: 12px; color: #6b7280; line-height: 1.5; margin-top: 4px; }
+    .loc-addr { font-size: 12px; color: #6b7280; line-height: 1.5; }
+    .job-desc { padding: 30px 60px; border-bottom: 1px solid #e5e7eb; }
+    .job-title { font-size: 16px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+    .job-desc-text { font-size: 13px; color: #374151; line-height: 1.7; }
+    .line-items { padding: 30px 60px; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 1px;
+      text-align: left; padding: 12px 0; border-bottom: 2px solid #111827;
+    }
+    thead th:last-child { text-align: right; }
+    tbody td {
+      font-size: 13px; padding: 14px 0; border-bottom: 1px solid #e5e7eb;
+      color: #374151; vertical-align: top;
+    }
+    tbody td:last-child { text-align: right; font-weight: 600; color: #111827; }
+    .item-name { font-weight: 600; color: #111827; }
+    .item-desc { font-size: 11px; color: #6b7280; margin-top: 2px; }
+    .qty { color: #6b7280; }
+    .totals-section { padding: 0 60px 30px; display: flex; justify-content: flex-end; }
+    .totals-box { width: 280px; }
+    .total-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; color: #6b7280; }
+    .grand-total { border-top: 2px solid #111827; margin-top: 8px; padding-top: 12px; font-size: 20px; font-weight: 800; color: #111827; }
+    .grand-total .tv { color: #FF6B35; }
+    .terms { padding: 0 60px 30px; border-bottom: 1px solid #e5e7eb; }
+    .terms-text { font-size: 11px; color: #6b7280; line-height: 1.7; }
+    .terms-text strong { color: #374151; }
+    .signatures { padding: 30px 60px 80px; display: flex; justify-content: space-between; gap: 40px; }
+    .sig-box { flex: 1; border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; min-height: 100px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; }
+    .sig-label { position: absolute; top: 12px; left: 16px; font-size: 10px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; }
+    .sig-line { border-top: 1px solid #374151; margin-top: auto; padding-top: 8px; }
+    .sig-name { font-size: 13px; font-weight: 600; color: #111827; }
+    .sig-role { font-size: 11px; color: #6b7280; }
+    .footer {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 60px;
+      background: #111827; display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-tagline { font-size: 12px; color: #FF6B35; font-weight: 700; }
+    .footer-powered { font-size: 10px; color: #6b7280; }
+    .footer-powered strong { color: #FF6B35; font-weight: 700; }
+    .watermark {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      font-size: 100px; font-weight: 800; color: rgba(255,107,53,0.03);
+      pointer-events: none; white-space: nowrap; z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="quote">
+    <div class="watermark">JOBOS</div>
+    <div class="topbar"></div>
+
+    <div class="header">
+      <div>
+        <div class="logo-area">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Wrench icon -->
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.3-3.3a1 1 0 0 0-1.4-1.4l-2.6 2.6-1-1 2.6-2.6a1 1 0 0 0-1.4-1.4l-3.3 3.3a1 1 0 0 0 0 1.4z" fill="#FF6B35"/>
+              <path d="M5.5 21a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0L3.5 19.6a1 1 0 0 0 0 1.4z" fill="#FF6B35"/>
+              <path d="M3.5 19.6l1.4 1.4" stroke="#FF6B35" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <div class="logo-brand">Smith & Son Plumbing</div>
+            <div class="logo-sub">Licensed Contractors · Since 2015</div>
+          </div>
+        </div>
+        <div class="company-details">
+          42 Victoria Road, Cape Town, 8001<br>
+          Tel: 021 555 0199 | Reg: 2015/123456/07
+        </div>
+      </div>
+      <div class="quote-meta">
+        <div class="quote-label">QUOTATION</div>
+        <div class="quote-number">Q-2026-0847</div>
+        <div class="quote-date">25 May 2026</div>
+        <div class="quote-valid">Valid for 14 days</div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <div>
+        <div class="client-label">Prepared For</div>
+        <div class="client-name">Mrs. Sarah Peters</div>
+        <div class="client-addr">
+          12 Main Road, Green Point<br>
+          Cape Town, 8005<br>
+          sarah.peters@email.co.za
+        </div>
+      </div>
+      <div>
+        <div class="loc-label">Job Location</div>
+        <div class="loc-addr">
+          12 Main Road, Green Point<br>
+          Cape Town, 8005
+        </div>
+      </div>
+    </div>
+
+    <div class="job-desc">
+      <div class="section-title">Scope of Work</div>
+      <div class="job-title">Bathroom Renovation — Full Plumbing Overhaul</div>
+      <div class="job-desc-text">
+        Complete bathroom plumbing replacement and upgrade. Includes leak detection, pipe rerouting,
+        new tap installations, toilet replacement, shower mixer upgrade, and drain unblocking.
+        All work to SABS standards with 5-year guarantee on workmanship.
+      </div>
+    </div>
+
+    <div class="line-items">
+      <div class="section-title">Itemized Costs</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:52%">Description</th>
+            <th style="width:15%">Qty</th>
+            <th style="width:15%">Rate</th>
+            <th style="width:18%;text-align:right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="item-name">Labour — Plumber (Day Rate)</div>
+              <div class="item-desc">3 days @ 8hrs | Experienced certified plumber</div>
+            </td>
+            <td class="qty">3 days</td>
+            <td>R950.00</td>
+            <td>R2,850.00</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">Leak Detection &amp; Repair</div>
+              <div class="item-desc">Electronic leak detection + pipe repair behind wall</div>
+            </td>
+            <td class="qty">1</td>
+            <td>R450.00</td>
+            <td>R450.00</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">PVC Pipe Replacement (20mm)</div>
+              <div class="item-desc">SABS approved pressure pipework, approx. 15m</div>
+            </td>
+            <td class="qty">15m</td>
+            <td>R85.00</td>
+            <td>R1,275.00</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">Premium Tap Set Installation</div>
+              <div class="item-desc">Bathroom basin mixer + bath spout + shower mixer</div>
+            </td>
+            <td class="qty">3 set</td>
+            <td>R320.00</td>
+            <td>R960.00</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">Toilet Replacement &amp; Installation</div>
+              <div class="item-desc">Removal old unit, install new dual-flush close-coupled</div>
+            </td>
+            <td class="qty">1</td>
+            <td>R1,850.00</td>
+            <td>R1,850.00</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">Drain Unblocking &amp; CCTV Inspection</div>
+              <div class="item-desc">High-pressure jet + camera inspection for root cause</div>
+            </td>
+            <td class="qty">1</td>
+            <td>R750.00</td>
+            <td>R750.00</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">Rubbish Removal &amp; Site Cleanup</div>
+              <div class="item-desc">All rubble removed + broom-clean handover</div>
+            </td>
+            <td class="qty">1</td>
+            <td>R350.00</td>
+            <td>R350.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals-section">
+      <div class="totals-box">
+        <div class="total-row"><span>Subtotal</span><span>R8,485.00</span></div>
+        <div class="total-row"><span>VAT (15%)</span><span>R1,272.75</span></div>
+        <div class="total-row grand-total"><span>TOTAL QUOTATION</span><span class="tv">R9,757.75</span></div>
+      </div>
+    </div>
+
+    <div class="terms">
+      <div class="section-title">Terms &amp; Conditions</div>
+      <div class="terms-text">
+        <strong>Payment:</strong> 50% deposit required to confirm booking. Balance due within 7 days of completion.<br>
+        <strong>Validity:</strong> Valid for 14 days from issue. Material prices may fluctuate after.<br>
+        <strong>Warranty:</strong> 5-year workmanship guarantee. Manufacturer warranty on fixtures.<br>
+        <strong>Access:</strong> Client provides site access during agreed hours. Parking required.<br>
+        <strong>Extras:</strong> Additional work quoted separately before commencement.
+      </div>
+    </div>
+
+    <div class="signatures">
+      <div class="sig-box">
+        <div class="sig-label">Quote Accepted By</div>
+        <div class="sig-line">
+          <div class="sig-name">Client Signature</div>
+          <div class="sig-role">Mrs. S. Peters — Date: ___/___/2026</div>
+        </div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-label">Quote Prepared By</div>
+        <div class="sig-line">
+          <div class="sig-name">J. Smith</div>
+          <div class="sig-role">Director, Smith &amp; Son Plumbing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-tagline">JobOS — Stop Losing Money to Admin</div>
+      <div class="footer-powered">Generated by <strong>JobOS</strong> — jobos.pro</div>
+    </div>
+  </div>
+</body>
+</html>

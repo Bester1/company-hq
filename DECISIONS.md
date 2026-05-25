@@ -3,6 +3,41 @@
 
 ---
 
+### 2026-05-25 | Chairman + Hermes
+**Topic:** JobOS 1-Person Company restructuring, corrected marketing plan, and bug handoff
+**Decision:**
+1. **Company structure revised:** Hermes-only execution from macOS. THOR, Frikkie, Zeus remain archived. Single brain, multiple workstreams tracked in Multica.
+2. **Marketing plan v2 approved:** Corrected from job-board positioning to trades-business-management positioning. Real competitors: Tradify, Jobber, Housecall Pro (not Indeed, SEEK, Monster).
+3. **Tagline locked:** "Stop Losing Money to Admin"
+4. **Pricing confirmed:** Free / Standard R249/mo / Premium R349/mo
+5. **Budget approved:** R3,500/month for marketing (R2K Meta + R1.5K Google)
+6. **Channel priority:** WhatsApp #1, TikTok/IG Reels #2, SEO #3, cold email #4, Facebook Groups #5, YouTube Shorts #6, referrals #7
+7. **90-day plan approved:** Phase 1 Foundation (Days 1–30) → Phase 2 Launch (Days 31–60) → Phase 3 Scale (Days 61–90). Targets: 200 free signups Month 1, 10 Std + 2 Prem conversions.
+8. **8 Multica issues created for Phase 1** (BES-11 through BES-18). Hermes will execute sequentially starting with BES-11 (WhatsApp) + BES-18 (bug report to Claude Code).
+9. **Bug report delivered:** JOBOS-BUGS-FOR-CLAUDE.md with 6 confirmed bugs forwarded to Chairman for handoff to Claude Code team. Fix #1–#3 before new features.
+10. **PROJECTS.md updated:** P0 = Product Stability + Marketing Launch. All THOR/Frikkie/Zeus projects archived. Single source of truth maintained.
+**Signed:** Hermes (CEO)
+
+---
+
+
+### 2026-05-24 | Chairman + Hermes
+**Topic:** Hermes workspace cleanup — old install purge, prompt bloat fix, streaming speed recovery
+**Decision:**
+1. Old install at `~/.hermes/hermes-agent-old` archived to `~/.hermes/hermes-agent-old.DEAD.20260524_125145`. Symlink `~/.hermes/hermes-agent` now points to `hermes-agent-new`.
+2. All launchd auto-respawn plists unloaded: `ai.hermes.gateway.plist`, `ai.hermes.dashboard.plist`, `ai.hermes.workspace.plist`, `com.hansa.hermes-dashboard.plist`. No zombie restarts.
+3. Root cause of 57s chat delay identified: `config.yaml` contained a ~5,000+ character system prompt (Company HQ board persona) plus `toolsets: [hermes-cli]`, inflating every request to ~16k prompt tokens. Ollama cloud proxy (`localhost:11434`) drops oversized streaming requests with `Connection reset by peer`, triggering exponential backoff retries.
+4. Patches applied:
+   - `hermes_state.py`: skip FTS5 initialization to prevent SQLite crashes under uv Python.
+   - `web_server.py`: add `DELETE /api/sessions/{id}/messages` endpoint.
+   - `claude-api.ts` line ~370: reverted incorrect `dashboardFetch()` back to `fetch(CLAUDE_API)` — `streamChat` is enhanced-fork-only; portable mode correctly routes via `openaiChat()` → gateway `/v1/chat/completions` on port 8642.
+5. Config fix: trimmed `system_prompt` in `~/.hermes/config.yaml` to concise version, removed `hermes-cli` from active toolsets, added to `disabled_toolsets`. Also cleared bloated `personalities` map.
+6. Active ports: gateway `localhost:8642`, dashboard `localhost:9119`, workspace dev `localhost:3000`.
+7. THOR, Frikkie, Zeus remain offline per user directive (May 2026). Hermes operates solo from macOS workspace.
+**Signed:** Hermes (CEO)
+
+---
+
 ### 2026-05-06 | Chairman + Hermes
 **Topic:** Hyperliquid Trading Analytics Dashboard + Bot Health Check
 **Decision:**
